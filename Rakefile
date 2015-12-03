@@ -18,11 +18,11 @@ task :bootstrap do
  commands = <<BOOTSTRAP
 sudo hostname #{hostname} && \
 sudo su - c 'echo #{hostname} > /etc/hostname' && \
-wget http://ap.puppetlabs.com/puppetlabs-release-precise.deb && \
+wget http://apt.puppetlabs.com/puppetlabs-release-precise.deb && \
 sudo dpkg -i puppetlabs-release.deb && \
 sudo apt-get update && sudo apt-get -y install git puppet && \
 git clone #{REPO} puppet && \
-sudo puppet applu --modulepath=/home/ubuntu/puppet/modules /home/ubuntu/puppet/manifests/site.pp
+sudo puppet apply --modulepath=/home/ubuntu/puppet/modules /home/ubuntu/puppet/manifests/site.pp
 BOOTSTRAP
  sh "#{SSH} #{client} '#{commands}'"
 end
